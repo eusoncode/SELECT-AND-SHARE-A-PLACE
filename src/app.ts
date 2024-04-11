@@ -2,6 +2,9 @@
 const form = document.querySelector('form')! as HTMLFormElement;
 const addressInput = document.getElementById('address')! as HTMLInputElement;
 
+//API Key
+const GOOGLE_API_KEY = 'AIzaSyBPee_7VIH-bzRceVBOnTo4rDilw6h6wKg';
+
 //Define function to fetch address input
 function searchAddressHandler(event:Event) {
   event.preventDefault();
