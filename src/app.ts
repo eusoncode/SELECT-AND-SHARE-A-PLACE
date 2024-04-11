@@ -6,6 +6,7 @@ const addressInput = document.getElementById('address')! as HTMLInputElement;
 
 //API Key
 const GOOGLE_API_KEY = 'AIzaSyBPee_7VIH-bzRceVBOnTo4rDilw6h6wKg';
+declare var google: any;
 
 // define type
 type GoogleGeocodingResponse = {
@@ -23,10 +24,15 @@ function searchAddressHandler(event:Event) {
     .then(response => {
       if (response.data.status !== 'OK') {
         throw new Error('Could not fetch locaton')
-      } else {
-        const coordinates = response.data.results[0].geometry.location;  
-        console.log(coordinates);       
-      }
+      } 
+      const coordinates = response.data.results[0].geometry.location; 
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: coordinates,
+        zoom: 8
+      });
+
+      // Adding a Marker
+      new google.maps.Marker({ position: coordinates, map: map });
     })
     .catch(err => {
       alert(err.message);
